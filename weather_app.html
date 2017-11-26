@@ -1,0 +1,40 @@
+<!--070117 nramiscal@gmail.com -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type = "text/javascript">
+        $(document).ready(function() {
+
+            $('form').submit(function() {
+                var city = $('input:text').val();
+                // console.log(city);
+                var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&&appid=a98ce87c5ab6c10935335017dae5a0f5";
+                $.get(url, function(res) {
+                    var t = res.main.temp - 273.15;
+                    t = Math.floor(t * 9/5 + 32);
+                    $('.city').html("<h1>" + res.name + "</h2>");
+                    $('.temp').html("<p>Temperature: " + t +" °F</p>");
+                }, 'json');
+                return false;
+            });
+        });
+    
+    </script>
+
+  </head>
+  <body>
+    <form action="">
+        <input id="city" type="text">
+        <input class="submit" type="submit" value="Search Weather"></input>
+    </form>
+    <div class="city"></div>
+    <div class="temp"></div>
+  </body>
+</html>
+
+
